@@ -20,19 +20,11 @@ cc_library(
         "lib/quantize.c",
     ],
     hdrs = ["lib/gif_lib.h"],
-    defines = select({
-        ":android": [
-            "S_IREAD=S_IRUSR",
-            "S_IWRITE=S_IWUSR",
-            "S_IEXEC=S_IXUSR",
-        ],
-        "@org_tensorflow//tensorflow:linux_aarch64": [
-            "S_IREAD=S_IRUSR",
-            "S_IWRITE=S_IWUSR",
-            "S_IEXEC=S_IXUSR",
-        ],
-        "//conditions:default": [],
-    }),
+    defines = [
+        "S_IREAD=S_IRUSR",
+        "S_IWRITE=S_IWUSR",
+        "S_IEXEC=S_IXUSR"
+    ],
     includes = ["lib/."],
     visibility = ["//visibility:public"],
     deps = select({
